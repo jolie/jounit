@@ -26,7 +26,7 @@ Tool used for Unit Test of Jolie Microservices
     - \<testname\>.ol -> test's code (you can recursively write goal to another <testname1>.ol here)
     - dependencies.ol.test (facultative) -> here you will write variables needed for the test
     - every other file needed for the test (such for example as a JSON with some structured data needed for an operations)
-    
+
 3. You need [JolieLang](http://jolie-lang.org/) and [Docker](https://www.docker.com/) installed on your computer
 
 4. You need a Running Docker Container of [Jocker](https://github.com/jolie/jocker). How to correct run jocker [HERE](http://claudioguidi.blogspot.it/2017/07/orchestrating-docker-containers-with.html)
@@ -34,7 +34,7 @@ Tool used for Unit Test of Jolie Microservices
 ### 1.1 - Format of ```init.ol```:
 
 The init.ol is simply a list of goal to test surrounded with a ```run( request )( response ) { ... }``` block. Every goal point to a file with test's code inside.
-    
+
 Example of ```init.ol``` for 3 separate testing file (```<testname1>.ol```, ```<testname2>.ol```, ```<testname3>.ol```):
 
 ```jolie
@@ -51,12 +51,12 @@ Example of ```init.ol``` for 3 separate testing file (```<testname1>.ol```, ```<
         goal@GoalManager( grq )( testResponse );
      }
 ```
-Here we execute 3 goal, calling each test we wrote. 
+Here we execute 3 goal, calling each test we wrote.
 
 For "Goal" we mean something that needs to be executed successfully for proceeding to the next goal. Every goal should return SUCCESS or FAILED (with a fault message in that case)
 
 If, for example, ```<testname2>```'s goal has a fault, it recursively stop every super-goal in waiting.
-    
+
 ### 1.2 - Format of a ```<testname.ol>```
 
 If you need ```dependencies.ol.test``` file, you must include it in ```<testname>.ol```
@@ -146,10 +146,10 @@ After cloning JoUnit's repository, you maybe need to edit the ```config.ini``` i
 - ```OrchestratorLocation=socket://<IPv4 address>:<port>``` is the local IP address and port on which microservice's container will send the output and on which the orchestrator are waiting. You can change the port, but for the IP address you have to check on which local IP docker container can communicate with the host machine:
     - for MacOS run ```ifcongif en0 | grep inet```. First output line is the IPv6 address while second's is the IPv4 one. In ```OrchestratorLocation``` you have to write, in <IPv4 address>, the address in the second line.
     - for Linux run ```ifcongif docker0 | grep inet```. Output is the IPv4 address that you have to write in <IPv4 address> in ```OrchestratorLocation```
-    
-## 3 - JoUnit Usage 
+
+## 3 - JoUnit Usage
 This tool works only with a clonable repository. This tool supports local repository (both absolute and relative path) and online repository ( URL )
 
-To run the tool go in JoUnit cloned directory and run ``` ./JoUnit <repo path or URL> ```. 
+To run the tool go in JoUnit cloned directory and run ``` ./JoUnit <repo path or URL> ```.
 
 You can also write a Script with a list of similar command and different address
